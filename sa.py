@@ -1,6 +1,8 @@
 # SA算法接口
 import numpy as np
 import random
+import matplotlib.pyplot as plt
+
 
 class sa:
     # 输入函数的左右边界和函数
@@ -48,6 +50,18 @@ class sa:
         all_y = list(map(self.f, self.all_x))
         return self.all_x[all_y.index(min(all_y))]
 
+    # 绘制迭代图像
+    def iter_pic(self, path=""):
+        l = len(self.all_x)
+        all_y = list(map(self.f, self.all_x))
+        plt.xlabel("Iteration")
+        plt.ylabel("f(x)")
+        plt.plot(range(l), all_y)
+        if path:
+            plt.savefig(path)
+        else:
+            plt.show()
+
     # 搜索函数
     def search(self):
         # 温度循环
@@ -62,15 +76,8 @@ class sa:
                     self.x = new_x
             self.all_x.append(self.x)
             self.T *= self.alpha
+        # self.iter_pic()
         return self.min_x()
 
-
-
-import math
-def square(x):
-    return pow(x, 3) * math.cos(x)
-
-x = np.random.uniform(-1, 2)
-a = sa(x, -1.57, 20.18, square, iter=200)
-print(a.search())
+    # 多次模拟
 
