@@ -91,6 +91,7 @@ if __name__ == '__main__':
     y_list = list(map(func, x_list))
     plt.plot(x_list, y_list)
     # plt.show()
+    plt.savefig("./pics/f1.jpg")
     plt.cla()
     # 多次模拟
     x_list = []
